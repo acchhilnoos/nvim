@@ -7,7 +7,8 @@ return{
     "ThePrimeagen/harpoon",
     "sbdchd/neoformat",
     "Pocco81/true-zen.nvim",
-    "knubie/vim-kitty-navigator", 
+    "knubie/vim-kitty-navigator",
+    "rcarriga/nvim-notify",
     { "numToStr/Comment.nvim", opts = {} },
     { "folke/twilight.nvim", opts = {} },
     {
