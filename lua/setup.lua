@@ -56,6 +56,12 @@ require("true-zen").setup({
 		lualine = true,
 	},
 })
+require("notify").setup({
+	background_colour = "#000000",
+	render = "simple",
+	stages = "fade",
+	timeout = 500,
+})
 require("obsidian").setup(
 	{
 		workspaces = {
