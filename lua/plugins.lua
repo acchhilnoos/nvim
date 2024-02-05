@@ -9,6 +9,10 @@ return{
     "Pocco81/true-zen.nvim",
     "knubie/vim-kitty-navigator",
     "rcarriga/nvim-notify",
+    "EdenEast/nightfox.nvim",
+    "nanotee/zoxide.vim",
+    "junegunn/fzf",
+    "nvim-tree/nvim-tree.lua",
     { "numToStr/Comment.nvim", opts = {} },
     { "folke/twilight.nvim", opts = {} },
     {

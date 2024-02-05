@@ -19,3 +19,9 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.termguicolors = true
+vim.opt.wrap = true
+vim.opt.linebreak = true
+
+vim.cmd([[
+:autocmd BufEnter *.tex set conceallevel=0
+]])
