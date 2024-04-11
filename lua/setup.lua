@@ -77,7 +77,7 @@ require('nightfox').setup({
 vim.cmd.colorscheme("duskfox")
 require("lualine").setup({
 	options = {
-		icons_enabled = false,
+		icons_enabled = true,
 		component_separators = "|",
 		section_separators = "",
 		theme = "duskfox",
@@ -87,16 +87,23 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "buffers" },
-		lualine_x = { "encoding", "fileformat", "filetype" },
+		lualine_c = { "filename" },
+		lualine_x = { "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
+	},
+	extensions = {
+		"ctrlspace",
+		"fugitive",
+		"fzf",
+		"mason",
+		"nvim-tree",
 	},
 })
 require("leap").add_default_mappings()
 require("true-zen").setup({
 	integrations = {
-		kitty = { enabled = true },
+		kitty = { enabled = true, font = "+2" },
 		twilight = false,
 		lualine = true,
 	},
@@ -111,8 +118,8 @@ require("obsidian").setup(
 	{
 		workspaces = {
 			{
-				name = "school",
-				path = "~/Documents/UBC/Year 3/Term 2",
+				name = "notes",
+				path = "~/Documents/UBC/Year 3/Term 2/Notes",
 			},
 		},
 		detect_cwd = false,
@@ -158,7 +165,6 @@ require("obsidian").setup(
 				id = note.id,
 				aliases = note.aliases,
 				tags = note.tags,
-				class = "",
 				date = os.date("%Y-%m-%d", os.time()),
 			}
 			if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
@@ -456,4 +462,15 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 })
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+	respect_buf_cwd = true,
+	view = {
+		centralize_selection = false,
+		relativenumber = true,
+		width = 30,
+		float = {
+			enable = true,
+		},
+	},
+})
+vim.cmd.cnoreabbrev("cwd", "Z %:h")

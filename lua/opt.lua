@@ -21,6 +21,7 @@ vim.opt.completeopt = "menuone,noselect"
 vim.opt.termguicolors = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.opt.showtabline = 0
 
 vim.cmd([[
 :autocmd BufEnter *.tex set conceallevel=0

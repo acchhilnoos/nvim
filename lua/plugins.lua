@@ -13,6 +13,7 @@ return{
     "nanotee/zoxide.vim",
     "junegunn/fzf",
     "nvim-tree/nvim-tree.lua",
+    "vim-ctrlspace/vim-ctrlspace",
     { "numToStr/Comment.nvim", opts = {} },
     { "folke/twilight.nvim", opts = {} },
     {
