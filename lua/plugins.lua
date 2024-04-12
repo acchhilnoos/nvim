@@ -12,8 +12,15 @@ return{
     "EdenEast/nightfox.nvim",
     "nanotee/zoxide.vim",
     "junegunn/fzf",
-    "nvim-tree/nvim-tree.lua",
+    -- "nvim-tree/nvim-tree.lua",
     "vim-ctrlspace/vim-ctrlspace",
+    {
+      'stevearc/oil.nvim',
+      opts = {},
+      -- Optional dependencies
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    { "echasnovski/mini.nvim", version = false },
     { "numToStr/Comment.nvim", opts = {} },
     { "folke/twilight.nvim", opts = {} },
     {
