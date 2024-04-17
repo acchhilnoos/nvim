@@ -87,17 +87,18 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "filename" },
+		lualine_c = { "buffers" },
 		lualine_x = { "filetype" },
-		lualine_y = { "progress" },
+		lualine_y = { "os.date('%a %b %d %H:%M')" },
 		lualine_z = { "location" },
 	},
 	extensions = {
 		"ctrlspace",
 		"fugitive",
 		"fzf",
+		"lazy",
 		"mason",
-		"nvim-tree",
+		"oil"
 	},
 })
 require("leap").add_default_mappings()
@@ -473,7 +474,15 @@ cmp.setup({
 -- 		},
 -- 	},
 -- })
-require("mini.starter").setup()
+local starter = require("mini.starter")
+starter.setup({
+	content_hooks = {
+	      starter.gen_hook.adding_bullet(),
+	      starter.gen_hook.indexing('all', { 'Builtin actions' }),
+	      starter.gen_hook.aligning('center', 'center'),
+    },
+	footer = "",
+})
 require("oil").setup({
   -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
   -- Set to false if you still want to use netrw.
@@ -488,7 +497,7 @@ require("oil").setup({
   },
   -- Buffer-local options to use for oil buffers
   buf_options = {
-    buflisted = false,
+    buflisted = true,
     bufhidden = "hide",
   },
   -- Window-local options to use for oil buffers
