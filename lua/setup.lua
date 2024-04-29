@@ -104,9 +104,9 @@ require("lualine").setup({
 require("leap").add_default_mappings()
 require("true-zen").setup({
 	integrations = {
-		kitty = { enabled = true, font = "+2" },
+		kitty = { enabled = true, font = "+8" },
 		twilight = false,
-		lualine = true,
+		lualine = false,
 	},
 })
 require("notify").setup({
@@ -476,10 +476,15 @@ cmp.setup({
 -- })
 local starter = require("mini.starter")
 starter.setup({
+	items = {
+		-- {name = "CWD", action = "Telescope find_files", section = "Telescope"},
+		starter.sections.recent_files(5,true,false),
+		starter.sections.recent_files(5,false,false),
+		starter.sections.builtin_actions(),
+	},
 	content_hooks = {
-	      starter.gen_hook.adding_bullet(),
-	      starter.gen_hook.indexing('all', { 'Builtin actions' }),
-	      starter.gen_hook.aligning('center', 'center'),
+	      	starter.gen_hook.indexing('all', { 'Builtin actions' }),
+	      	starter.gen_hook.aligning('center', 'center'),
     },
 	footer = "",
 })
