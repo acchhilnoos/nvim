@@ -26,7 +26,6 @@ vim.keymap.set("n", "<leader>a9", "<cmd>lua require('harpoon.ui').nav_file(9)<CR
 vim.keymap.set("n", "<leader>a0", "<cmd>lua require('harpoon.ui').nav_file(0)<CR>", {})
 vim.keymap.set("n", "[a", "<cmd>lua require('harpoon.ui').nav_prev()<CR>", {})
 vim.keymap.set("n", "]a", "<cmd>lua require('harpoon.ui').nav_next()<CR>", {})
-vim.keymap.set("v", "<leader>zf", ":'<,'>TZNarrow<CR>", {})
 vim.keymap.set("n", "<leader>zf", ":TZAtaraxis<CR>", {})
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -60,3 +59,5 @@ vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
+vim.keymap.set("n", "<leader>u", function() vim.cmd.UndotreeToggle() vim.cmd.UndotreeFocus() end)
+vim.keymap.set("n", "<leader>os", "<cmd> lua MiniSessions.select()<CR>")

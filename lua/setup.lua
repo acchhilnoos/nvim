@@ -22,15 +22,15 @@ require("telescope").setup({
 pcall(require("telescope").load_extension, "fzf")
 vim.cmd("filetype plugin on")
 vim.o.termguicolors = true
-require("catppuccin").setup({
-	flavour = "mocha",
-	transparent_background = true,
-	dim_inactive = {
-		enabled = false,
-		shade = "dark",
-		percentage = 0,
-	},
-})
+-- require("catppuccin").setup({
+-- 	flavour = "mocha",
+-- 	transparent_background = true,
+-- 	dim_inactive = {
+-- 		enabled = false,
+-- 		shade = "dark",
+-- 		percentage = 0,
+-- 	},
+-- })
 require('nightfox').setup({
   options = {
     -- Compiled file's destination location
@@ -93,7 +93,6 @@ require("lualine").setup({
 		lualine_z = { "location" },
 	},
 	extensions = {
-		"ctrlspace",
 		"fugitive",
 		"fzf",
 		"lazy",
@@ -103,10 +102,16 @@ require("lualine").setup({
 })
 require("leap").add_default_mappings()
 require("true-zen").setup({
+	-- modes = {
+	-- 	ataraxis = {
+	-- 		shade = "dark",
+	-- 		backdrop = 1,
+	-- 	},
+	-- },
 	integrations = {
-		kitty = { enabled = true, font = "+8" },
+		kitty = { enabled = true, font = "+4" },
 		twilight = false,
-		lualine = false,
+		lualine = true,
 	},
 })
 require("notify").setup({
@@ -416,6 +421,9 @@ mason_lspconfig.setup_handlers({
 		})
 	end,
 })
+require'lspconfig'.clangd.setup{
+	cmd = {'/Library/Developer/CommandLineTools/usr/bin/clangd'}
+}
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -477,16 +485,20 @@ cmp.setup({
 local starter = require("mini.starter")
 starter.setup({
 	items = {
-		-- {name = "CWD", action = "Telescope find_files", section = "Telescope"},
 		starter.sections.recent_files(5,true,false),
 		starter.sections.recent_files(5,false,false),
-		starter.sections.builtin_actions(),
+		{name = "File explorer", action = "Oil",  section = "Actions"},
+		{name = "New buffer",    action = "enew", section = "Actions"},
+		{name = "Quit",          action = "qall", section = "Actions"},
 	},
 	content_hooks = {
-	      	starter.gen_hook.indexing('all', { 'Builtin actions' }),
+	      	starter.gen_hook.indexing('all', { 'Actions' }),
 	      	starter.gen_hook.aligning('center', 'center'),
     },
 	footer = "",
+})
+require("mini.sessions").setup({
+	directory = "~/.vim/sessions/",
 })
 require("oil").setup({
   -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
