@@ -1,7 +1,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
--- vim.keymap.set("n", "<leader>pv", "<cmd>lua require('nvim-tree.api').tree.open()<CR>", {})
 vim.keymap.set("n", "<leader>pv", "<cmd>lua require('oil').open()<CR>", {})
 vim.keymap.set("n", "<leader>H", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>J", ":split <BAR> :wincmd j<CR>")

@@ -22,59 +22,6 @@ require("telescope").setup({
 pcall(require("telescope").load_extension, "fzf")
 vim.cmd("filetype plugin on")
 vim.o.termguicolors = true
--- require("catppuccin").setup({
--- 	flavour = "mocha",
--- 	transparent_background = true,
--- 	dim_inactive = {
--- 		enabled = false,
--- 		shade = "dark",
--- 		percentage = 0,
--- 	},
--- })
-require('nightfox').setup({
-  options = {
-    -- Compiled file's destination location
-    compile_path = vim.fn.stdpath("cache") .. "/nightfox",
-    compile_file_suffix = "_compiled", -- Compiled file suffix
-    transparent = true,      -- Disable setting background
-    terminal_colors = true,  -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-    dim_inactive = false,    -- Non focused panes set to alternative background
-    module_default = true,   -- Default enable value for modules
-    colorblind = {
-      enable = false,        -- Enable colorblind support
-      simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
-      severity = {
-        protan = 0,          -- Severity [0,1] for protan (red)
-        deutan = 0,          -- Severity [0,1] for deutan (green)
-        tritan = 0,          -- Severity [0,1] for tritan (blue)
-      },
-    },
-    styles = {               -- Style to be applied to different syntax groups
-      comments = "italic",     -- Value is any valid attr-list value `:help attr-list`
-      conditionals = "NONE",
-      constants = "NONE",
-      functions = "NONE",
-      keywords = "NONE",
-      numbers = "NONE",
-      operators = "NONE",
-      strings = "NONE",
-      types = "NONE",
-      variables = "NONE",
-    },
-    inverse = {             -- Inverse highlight for different types
-      match_paren = false,
-      visual = false,
-      search = false,
-    },
-    modules = {             -- List of various plugins and additional options
-      -- ...
-    },
-  },
-  palettes = {},
-  specs = {},
-  groups = {},
-})
-vim.cmd.colorscheme("duskfox")
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -128,17 +75,16 @@ require("obsidian").setup(
 				path = "~/Documents/UBC/Year 3/Term 2/Notes",
 			},
 		},
-		detect_cwd = false,
 		log_level = vim.log.levels.INFO,
 		daily_notes = {
 		},
+		new_notes_location = "current_dir",
 		completion = {
 			nvim_cmp = true,
 			min_chars = 2,
-			new_notes_location = "current_dir",
-			prepend_note_id = true,
-			prepend_note_path = false,
-			use_path_only = false,
+			-- prepend_note_id = true,
+			-- prepend_note_path = false,
+			-- use_path_only = false,
 		},
 		mappings = {
 			["gf"] = {
@@ -380,20 +326,32 @@ local on_attach = function(_, bufnr)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
 end
-require("which-key").register({
-	["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-	["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-	["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-	["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-	["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-	["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-	["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-	["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-})
-require("which-key").register({
-	["<leader>"] = { name = "VISUAL <leader>" },
-	["<leader>h"] = { "Git [H]unk" },
-}, { mode = "v" })
+require("which-key").add(
+  {
+    { "<leader>c", group = "[C]ode" },
+    { "<leader>c_", hidden = true },
+    { "<leader>d", group = "[D]ocument" },
+    { "<leader>d_", hidden = true },
+    { "<leader>g", group = "[G]it" },
+    { "<leader>g_", hidden = true },
+    { "<leader>h", group = "Git [H]unk" },
+    { "<leader>h_", hidden = true },
+    { "<leader>r", group = "[R]ename" },
+    { "<leader>r_", hidden = true },
+    { "<leader>s", group = "[S]earch" },
+    { "<leader>s_", hidden = true },
+    { "<leader>t", group = "[T]oggle" },
+    { "<leader>t_", hidden = true },
+    { "<leader>w", group = "[W]orkspace" },
+    { "<leader>w_", hidden = true },
+  }
+)
+require("which-key").add(
+  {
+    { "<leader>", group = "VISUAL <leader>", mode = "v" },
+    { "<leader>h", desc = "Git [H]unk", mode = "v" },
+  }
+)
 require("mason").setup()
 require("mason-lspconfig").setup()
 local servers = {
