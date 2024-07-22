@@ -27,7 +27,6 @@ require("lualine").setup({
 		icons_enabled = true,
 		component_separators = "|",
 		section_separators = "",
-		theme = "duskfox",
 		always_divide_middle = true,
 		globalstatus = false,
 	},
