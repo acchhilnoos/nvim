@@ -1,36 +1,36 @@
 return{
+    "ggandor/leap.nvim",
+    "knubie/vim-kitty-navigator",
+    "lervag/vimtex",
+    "mbbill/undotree",
+    "Pocco81/true-zen.nvim",
+    "rcarriga/nvim-notify",
+    "sbdchd/neoformat",
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
     "tpope/vim-sleuth",
-    "lervag/vimtex",
-    "ggandor/leap.nvim",
-    -- "ThePrimeagen/harpoon",
-    "sbdchd/neoformat",
-    "Pocco81/true-zen.nvim",
-    "knubie/vim-kitty-navigator",
-    "rcarriga/nvim-notify",
-    -- "EdenEast/nightfox.nvim",
-    -- "nanotee/zoxide.vim",
-    -- "junegunn/fzf",
-    "mbbill/undotree",
-    -- "nvim-tree/nvim-tree.lua",
-    -- "vim-ctrlspace/vim-ctrlspace",
-    {
-      'stevearc/oil.nvim',
-      opts = {},
-      -- Optional dependencies
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
     { "echasnovski/mini.nvim", version = false },
-    { "numToStr/Comment.nvim", opts = {} },
     { "folke/twilight.nvim", opts = {} },
+    { "folke/which-key.nvim", opts = {} },
+    { "numToStr/Comment.nvim", opts = {} },
     {
-	"neovim/nvim-lspconfig",
+	"epwalsh/obsidian.nvim",
+	version = "*",
+	lazy = true,
+	ft = "markdown",
 	dependencies = {
-	    "williamboman/mason.nvim",
-	    "williamboman/mason-lspconfig.nvim",
-	    { "j-hui/fidget.nvim", opts = {} },
-	    "folke/neodev.nvim",
+	    "nvim-lua/plenary.nvim",
+	    "hrsh7th/nvim-cmp",
+	},
+    },
+    {
+	"folke/noice.nvim",
+	event = "VeryLazy",
+	opts = {
+	},
+	dependencies = {
+	    "MunifTanjim/nui.nvim",
+	    "rcarriga/nvim-notify",
 	},
     },
     {
@@ -42,7 +42,6 @@ return{
             "rafamadriz/friendly-snippets",
 	},
     },
-    { "folke/which-key.nvim", opts = {} },
     {
 	"lewis6991/gitsigns.nvim",
 	opts = {
@@ -103,19 +102,23 @@ return{
 	    end,
 	},
     },
- --    {
-	-- "catppuccin/nvim",
-	-- name = "catppuccin",
-	-- priority = 1000,
- --    },
-    {
-	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
     {
 	"lukas-reineke/indent-blankline.nvim",
 	main = "ibl",
 	opts = {},
+    },
+    {
+	"neovim/nvim-lspconfig",
+	dependencies = {
+	    "williamboman/mason.nvim",
+	    "williamboman/mason-lspconfig.nvim",
+	    { "j-hui/fidget.nvim", opts = {} },
+	    "folke/neodev.nvim",
+	},
+    },
+    {
+	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
 	"nvim-telescope/telescope.nvim",
@@ -139,23 +142,8 @@ return{
 	build = ":TSUpdate",
     },
     {
-	"folke/noice.nvim",
-	event = "VeryLazy",
-	opts = {
-	},
-	dependencies = {
-	    "MunifTanjim/nui.nvim",
-	    "rcarriga/nvim-notify",
-	},
-    },
-    {
-	"epwalsh/obsidian.nvim",
-	version = "*",
-	lazy = true,
-	ft = "markdown",
-	dependencies = {
-	    "nvim-lua/plenary.nvim",
-	    "hrsh7th/nvim-cmp",
-	},
+	'stevearc/oil.nvim',
+	opts = {},
+	dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 }

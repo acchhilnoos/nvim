@@ -23,6 +23,11 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.showtabline = 0
 
+vim.cmd("highlight Normal guibg=none")
+vim.cmd("highlight NonText guibg=none")
+vim.cmd("highlight Normal ctermbg=none")
+vim.cmd("highlight NonText ctermbg=none")
+
 vim.cmd([[
 :autocmd BufEnter *.tex set conceallevel=0
 ]])
