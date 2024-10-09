@@ -6,7 +6,7 @@ return {
                 accept_suggestion = "<C-l>",
                 accept_word = "<C-k>",
             },
-            disable_inline_completion = true,
+            disable_inline_completion = false,
         })
     end,
 }
