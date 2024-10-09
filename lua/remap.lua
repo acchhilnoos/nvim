@@ -1,14 +1,16 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.keymap.set("n", "<leader>pv", "<cmd>lua require('oil').open()<CR>", {})
+vim.keymap.set("n", "<leader>pv", "<cmd>lua require('oil').open_float()<CR>", {})
 vim.keymap.set("n", "<leader>H", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>J", ":split <BAR> :wincmd j<CR>")
 vim.keymap.set("n", "<leader>K", ":split<CR>")
 vim.keymap.set("n", "<leader>L", ":vsplit <BAR> :wincmd l<CR>")
 vim.cmd.nnoremap("<C-d>", "<C-d>zz")
 vim.cmd.nnoremap("<C-u>", "<C-u>zz")
-vim.cmd.inoremap("jj", "<Esc>")
+vim.cmd.nnoremap("<C-o>", "<C-o>zz")
+vim.cmd.nnoremap("<C-i>", "<C-i>zz")
 vim.keymap.set("n", "<leader>zf", ":TZAtaraxis<CR>", {})
+vim.keymap.set("n", "<leader>tw", ":Twilight<CR>", {})
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -20,7 +22,7 @@ vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc =
 vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>/", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
+		winblend = 0,
 		previewer = false,
 	}))
 end, { desc = "[/] Fuzzily search in current buffer" })
@@ -42,4 +44,6 @@ vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by 
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
 vim.keymap.set("n", "<leader>u", function() vim.cmd.UndotreeToggle() vim.cmd.UndotreeFocus() end)
-vim.keymap.set("n", "<leader>os", "<cmd> lua MiniSessions.select()<CR>")
+-- vim.keymap.set("n", "<leader>os", "<cmd> lua MiniSessions.select()<CR>")
+vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianOpen<CR>")
+vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>")
