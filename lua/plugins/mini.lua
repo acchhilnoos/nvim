@@ -9,9 +9,10 @@ return {
             items = {
                 starter.sections.recent_files(5,true,false),
                 starter.sections.recent_files(5,false,false),
-                {name = "File explorer", action = "Oil",  section = "Actions"},
-                {name = "New buffer",    action = "enew", section = "Actions"},
-                {name = "Quit",          action = "qall", section = "Actions"},
+                {name = "File explorer", action = "lua require('oil').open_float()", section = "Actions"},
+                {name = "Lazy",          action = "Lazy",                            section = "Actions"},
+                {name = "New buffer",    action = "enew",                            section = "Actions"},
+                {name = "Quit",          action = "qall",                            section = "Actions"},
             },
             content_hooks = {
                 starter.gen_hook.indexing('all', { 'Actions' }),
