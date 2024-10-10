@@ -8,7 +8,8 @@ return {
         ---- GENERAL
 
         -- WRITE/QUIT
-        wk.add({ "<leader>w", ":w<CR>", hidden = true })
+        wk.add({ "<leader>w",  ":w<CR>", hidden = true })
+        wk.add({ "<leader>qq", ":q<CR>", hidden = true })
 
         -- WINDOWS
         wk.add({ "<leader>H", ":vsplit<CR>",                 hidden = true })
@@ -30,6 +31,25 @@ return {
         wk.add({ "<leader>fd", vim.diagnostic.open_float,  desc = "[F]loating [D]iagnostics" })
 
         ---- PLUGIN
+
+        wk.add({
+            { "<leader>c",  group = "[C]ode" },
+            { "<leader>c_", hidden = true },
+            { "<leader>d",  group = "[D]ocument" },
+            { "<leader>d_", hidden = true },
+            { "<leader>f",  group = "[F]loating" },
+            { "<leader>f_", hidden = true },
+            { "g",          group = "[G]oto" },
+            { "g_",         hidden = true },
+            { "<leader>r",  group = "[R]ename" },
+            { "<leader>r_", hidden = true },
+            { "<leader>s",  group = "[S]earch" },
+            { "<leader>s_", hidden = true },
+            { "<leader>t",  group = "[T]oggle" },
+            { "<leader>t_", hidden = true },
+            { "<leader>w",  group = "[W]orkspace" },
+            { "<leader>w_", hidden = true },
+        })
 
         -- cmp
         local cmp = require("cmp")
@@ -138,17 +158,9 @@ return {
         wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
 
         -- true-zen
-        wk.add({ "<leader>tz", ":TZAtaraxis<CR>", desc = "[T]oggle [Z]en" })
+        wk.add({ "<leader>tf", function() vim.cmd.TZAtaraxis() end, desc = "[T]oggle [F]ocus" })
 
-        wk.add({
-            { "<leader>c", group = "[C]ode" },
-            { "<leader>d", group = "[D]ocument" },
-            { "<leader>g", group = "[F]loating" },
-            { "<leader>g", group = "[G]oto" },
-            { "<leader>r", group = "[R]ename" },
-            { "<leader>s", group = "[S]earch" },
-            { "<leader>t", group = "[T]oggle" },
-            { "<leader>w", group = "[W]orkspace" },
-        })
+        -- undotree
+        wk.add({ "<leader>tu", function() vim.cmd.UndotreeToggle() vim.cmd.UndotreeFocus() end, desc = "[T]oggle [U]ndotree" })
     end,
 }

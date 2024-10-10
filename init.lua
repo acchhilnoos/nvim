@@ -17,7 +17,9 @@ vim.g.maplocalleader = " "
 require("opt")
 require("lazy").setup({
     spec = {
-        { import = "plugins" },
+        -- all LSP functionality is in lsp.lua
+        -- all keymaps are in remap.lua
+        { import = "config" },
     },
     install = {
         colorscheme = None

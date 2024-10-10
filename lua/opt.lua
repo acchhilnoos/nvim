@@ -32,6 +32,8 @@ vim.cmd([[
 :autocmd BufEnter *.tex set conceallevel=0
 ]])
 
+vim.opt.showtabline = 0
+
 -- HIGHLIGHT ON YANK
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
