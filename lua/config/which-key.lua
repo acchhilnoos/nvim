@@ -91,7 +91,7 @@ return {
                 local blame_line = function()
                     gs.blame_line({ full = false })
                 end
-                wk.add({ "<leader>hb", blame_line,                   desc = "[F]loating [B]lame" })
+                wk.add({ "<leader>fb", blame_line,                   desc = "[F]loating [B]lame" })
                 wk.add({ "<leader>tb", gs.toggle_current_line_blame, desc = "[T]oggle git [B]lame" })
                 wk.add({ "<leader>td", gs.toggle_deleted,            desc = "[T]oggle git [D]eleted" })
             end,
