@@ -7,7 +7,16 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            { "j-hui/fidget.nvim", opts = { notification = { window = { winblend = 100 }, }, }, },
+            {
+                "j-hui/fidget.nvim",
+                opts = {
+                    notification = {
+                        window = {
+                            winblend = 0,
+                        },
+                    },
+                },
+            },
             "folke/neodev.nvim",
         },
     },
@@ -20,19 +29,12 @@ return {
                     "clangd",
                     "jdtls",
                     "lua_ls",
+                    "texlab",
+                    "marksman",
                     "pyright",
                 },
             })
-
             require("neodev").setup()
-
-            require("mason-lspconfig").setup_handlers({
-                function(server_name)
-                    require("lspconfig")[server_name].setup(
-                    {}
-                    )
-                end,
-            })
         end,
     }
 }

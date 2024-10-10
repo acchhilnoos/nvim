@@ -50,7 +50,7 @@ vim.opt.mouse = ""
 -- SEARCH
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 
 -- SIGNCOLUMN
 vim.wo.signcolumn = "yes"

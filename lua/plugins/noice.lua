@@ -6,6 +6,12 @@ return {
         "rcarriga/nvim-notify",
     },
     config = function()
-        require("noice").setup()
+        require("noice").setup({
+            lsp = {
+                progress = {
+                    enabled = false,
+                },
+            },
+        })
     end,
 }
