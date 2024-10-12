@@ -8,13 +8,16 @@ return {
         ---- GENERAL
 
         -- WRITE/QUIT
-        wk.add({ "<leader>w",  ":w<CR>", hidden = true })
-        wk.add({ "<leader>qq", ":q<CR>", hidden = true })
+        wk.add({ "<leader>w", ":w<CR>", desc = "[W]rite" })
+        wk.add({ "<leader>wq", ":wq<CR>", desc = "[W]rite  [Q]uit" })
+
+        -- FORMAT
+        wk.add({ "<leader>df", ":lua vim.lsp.buf.format()<CR> <BAR> :w<CR>", desc = "[D]ocument [F]ormat" })
 
         -- WINDOWS
-        wk.add({ "<leader>H", ":vsplit<CR>",                 hidden = true })
-        wk.add({ "<leader>J", ":split <BAR> :wincmd j<CR>",  hidden = true })
-        wk.add({ "<leader>K", ":split<CR>",                  hidden = true })
+        wk.add({ "<leader>H", ":vsplit<CR>", hidden = true })
+        wk.add({ "<leader>J", ":split <BAR> :wincmd j<CR>", hidden = true })
+        wk.add({ "<leader>K", ":split<CR>", hidden = true })
         wk.add({ "<leader>L", ":vsplit <BAR> :wincmd l<CR>", hidden = true })
 
         -- SCROLL
@@ -28,7 +31,7 @@ return {
         vim.cmd.vnoremap(">", ">gv")
 
         -- DIAGNOSTICS
-        wk.add({ "<leader>fd", vim.diagnostic.open_float,  desc = "[F]loating [D]iagnostics" })
+        wk.add({ "<leader>fd", vim.diagnostic.open_float, desc = "[F]loating [D]iagnostics" })
 
         ---- PLUGIN
 
@@ -41,6 +44,8 @@ return {
             { "<leader>f_", hidden = true },
             { "g",          group = "[G]oto" },
             { "g_",         hidden = true },
+            { "<leader>o",  desc = "[O]pen" },
+            { "o_",         hidden = true },
             { "<leader>r",  group = "[R]ename" },
             { "<leader>r_", hidden = true },
             { "<leader>s",  group = "[S]earch" },
@@ -56,31 +61,31 @@ return {
         local luasnip = require("luasnip")
         cmp.setup({
             mapping = cmp.mapping.preset.insert({
-                ["<C-n>"]     = cmp.mapping.select_next_item(),
-                ["<C-p>"]     = cmp.mapping.select_prev_item(),
+                ["<C-j>"]     = cmp.mapping.select_next_item(),
+                ["<C-k>"]     = cmp.mapping.select_prev_item(),
                 ["<C-Space>"] = cmp.mapping.complete({}),
                 ["<CR>"]      = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select   = true,
                 }),
-                ["<Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.locally_jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
+                -- ["<Tab>"]     = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_next_item()
+                --     elseif luasnip.expand_or_locally_jumpable() then
+                --         luasnip.expand_or_jump()
+                --     else
+                --         fallback()
+                --     end
+                -- end, { "i", "s" }),
+                -- ["<S-Tab>"]   = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_prev_item()
+                --     elseif luasnip.locally_jumpable(-1) then
+                --         luasnip.jump(-1)
+                --     else
+                --         fallback()
+                --     end
+                -- end, { "i", "s" }),
             }),
         })
 
@@ -91,9 +96,10 @@ return {
                 local blame_line = function()
                     gs.blame_line({ full = false })
                 end
-                wk.add({ "<leader>fb", blame_line,                   desc = "[F]loating [B]lame" })
+                wk.add({ "<leader>fb", blame_line, desc = "[F]loating [B]lame" })
                 wk.add({ "<leader>tb", gs.toggle_current_line_blame, desc = "[T]oggle git [B]lame" })
-                wk.add({ "<leader>td", gs.toggle_deleted,            desc = "[T]oggle git [D]eleted" })
+                wk.add({ "<leader>td", gs.toggle_deleted, desc = "[T]oggle git [D]eleted" })
+                wk.add({ "<leader>fh", gs.preview_hunk, desc = "[F]loating [H]unk" })
             end,
         })
 
@@ -124,18 +130,23 @@ return {
                 previewer = false,
             }))
         end
-        wk.add({ "<leader><space>", tbi.buffers,  desc = "[ ] Find existing buffers" })
-        wk.add({ "<leader>/",       find,         desc = "[/] Find in current buffer" })
-        wk.add({ "<leader>?",       tbi.oldfiles, desc = "[?] Find recently opened files" })
+        wk.add({ "<leader><space>", tbi.buffers, desc = "[ ] Find existing buffers" })
+        wk.add({ "<leader>/", find, desc = "[/] Find in current buffer" })
+        wk.add({ "<leader>?", tbi.oldfiles, desc = "[?] Find recently opened files" })
 
         local on_attach = function(_, bufnr)
-            wk.add({ "<leader>rn", vim.lsp.buf.rename,                                         desc = "[R]e[n]ame" })
-            wk.add({ "<leader>ca", vim.lsp.buf.code_action,                                    desc = "[C]ode [A]ction" })
-            wk.add({ "gd",         require("telescope.builtin").lsp_definitions,               desc = "[G]oto [D]efinition" })
-            wk.add({ "gr",         require("telescope.builtin").lsp_references,                desc = "[G]oto [R]eferences" })
-            wk.add({ "gI",         require("telescope.builtin").lsp_implementations,           desc = "[G]oto [I]mplementation" })
-            wk.add({ "<leader>ds", require("telescope.builtin").lsp_document_symbols,          desc = "[D]ocument [S]ymbols" })
-            wk.add({ "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, desc = "[W]orkspace [S]ymbols" })
+            wk.add({ "<leader>rn", vim.lsp.buf.rename, desc = "[R]e[n]ame" })
+            wk.add({ "<leader>ca", vim.lsp.buf.code_action, desc = "[C]ode [A]ction" })
+            wk.add({ "gd", require("telescope.builtin").lsp_definitions, desc = "[G]oto [D]efinition" })
+            wk.add({ "gr", require("telescope.builtin").lsp_references, desc = "[G]oto [R]eferences" })
+            wk.add({ "gI", require("telescope.builtin").lsp_implementations, desc = "[G]oto [I]mplementation" })
+            wk.add({ "<leader>ds", require("telescope.builtin").lsp_document_symbols, desc = "[D]ocument [S]ymbols" })
+            wk.add({
+                "<leader>ws",
+                require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                desc =
+                "[W]orkspace [S]ymbols"
+            })
         end
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -151,8 +162,11 @@ return {
             end,
         })
 
+        -- obsidian
+        wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
+
         -- oil
-        wk.add({ "<leader>pv", "<cmd>lua require('oil').open_float()<CR>", hidden = true})
+        wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
 
         -- twilight
         wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
@@ -161,6 +175,13 @@ return {
         wk.add({ "<leader>tf", function() vim.cmd.TZAtaraxis() end, desc = "[T]oggle [F]ocus" })
 
         -- undotree
-        wk.add({ "<leader>tu", function() vim.cmd.UndotreeToggle() vim.cmd.UndotreeFocus() end, desc = "[T]oggle [U]ndotree" })
+        wk.add({
+            "<leader>tu",
+            function()
+                vim.cmd.UndotreeToggle()
+                vim.cmd.UndotreeFocus()
+            end,
+            desc = "[T]oggle [U]ndotree"
+        })
     end,
 }
