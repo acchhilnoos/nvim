@@ -8,7 +8,7 @@ return {
         starter.setup({
             items = {
                 starter.sections.recent_files(5, true, false),
-                starter.sections.recent_files(5, false, false),
+                starter.sections.recent_files(10, false, false),
                 { name = "Finder",     action = "lua require('oil').open_float()", section = "Actions" },
                 { name = "Lazy",       action = "Lazy",                            section = "Actions" },
                 { name = "New buffer", action = "enew",                            section = "Actions" },

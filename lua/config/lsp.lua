@@ -34,6 +34,9 @@ return {
                     "pyright",
                 },
             })
+            require("lspconfig").racket_langserver.setup({
+                cmd = { "/Applications/Racket v8.14/bin/racket", "--lib", "racket-langserver" },
+            })
             require("neodev").setup()
         end,
     }

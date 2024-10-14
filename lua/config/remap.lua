@@ -63,29 +63,28 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-j>"]     = cmp.mapping.select_next_item(),
                 ["<C-k>"]     = cmp.mapping.select_prev_item(),
-                ["<C-Space>"] = cmp.mapping.complete({}),
                 ["<CR>"]      = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select   = true,
                 }),
-                -- ["<Tab>"]     = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.select_next_item()
-                --     elseif luasnip.expand_or_locally_jumpable() then
-                --         luasnip.expand_or_jump()
-                --     else
-                --         fallback()
-                --     end
-                -- end, { "i", "s" }),
-                -- ["<S-Tab>"]   = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.select_prev_item()
-                --     elseif luasnip.locally_jumpable(-1) then
-                --         luasnip.jump(-1)
-                --     else
-                --         fallback()
-                --     end
-                -- end, { "i", "s" }),
+                ["<Tab>"]     = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_locally_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                ["<S-Tab>"]   = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
             }),
         })
 
@@ -99,15 +98,15 @@ return {
                 wk.add({ "<leader>fb", blame_line, desc = "[F]loating [B]lame" })
                 wk.add({ "<leader>tb", gs.toggle_current_line_blame, desc = "[T]oggle git [B]lame" })
                 wk.add({ "<leader>td", gs.toggle_deleted, desc = "[T]oggle git [D]eleted" })
-                wk.add({ "<leader>fh", gs.preview_hunk, desc = "[F]loating [H]unk" })
+                wk.add({ "<leader>fp", gs.preview_hunk, desc = "[F]loating [P]review Hunk" })
             end,
         })
 
         -- supermaven
         require("supermaven-nvim").setup({
             keymaps = {
-                accept_suggestion = "<C-l>",
-                accept_word       = "<C-k>",
+                accept_suggestion = "<C-Space>",
+                accept_word       = "<C-l>",
             },
         })
 
@@ -135,7 +134,7 @@ return {
         wk.add({ "<leader>?", tbi.oldfiles, desc = "[?] Find recently opened files" })
 
         local on_attach = function(_, bufnr)
-            wk.add({ "<leader>rn", vim.lsp.buf.rename, desc = "[R]e[n]ame" })
+            wk.add({ "<leader>rn", ":IncRename ", desc = "[R]e[n]ame" })
             wk.add({ "<leader>ca", vim.lsp.buf.code_action, desc = "[C]ode [A]ction" })
             wk.add({ "gd", require("telescope.builtin").lsp_definitions, desc = "[G]oto [D]efinition" })
             wk.add({ "gr", require("telescope.builtin").lsp_references, desc = "[G]oto [R]eferences" })
