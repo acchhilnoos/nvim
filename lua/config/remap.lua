@@ -20,11 +20,15 @@ return {
         wk.add({ "<leader>K", ":split<CR>", hidden = true })
         wk.add({ "<leader>L", ":vsplit <BAR> :wincmd l<CR>", hidden = true })
 
-        -- SCROLL
+        -- MOVEMENT
+        vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+        vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
         vim.cmd.nnoremap("<C-d>", "<C-d>zz")
         vim.cmd.nnoremap("<C-i>", "<C-i>zz")
         vim.cmd.nnoremap("<C-o>", "<C-o>zz")
         vim.cmd.nnoremap("<C-u>", "<C-u>zz")
+        vim.cmd.nnoremap("#", "#zz")
+        vim.cmd.nnoremap("*", "*zz")
 
         -- INDENT
         vim.cmd.vnoremap("<", "<gv")
@@ -44,6 +48,10 @@ return {
             { "<leader>f_", hidden = true },
             { "g",          group = "[G]oto" },
             { "g_",         hidden = true },
+            { "<leader>g",  group = "[G]it" },
+            { "<leader>g_", hidden = true },
+            { "<leader>l",  desc = "Vimtex" },
+            { "l_",         hidden = true },
             { "<leader>o",  desc = "[O]pen" },
             { "o_",         hidden = true },
             { "<leader>r",  group = "[R]ename" },
@@ -61,13 +69,13 @@ return {
         local luasnip = require("luasnip")
         cmp.setup({
             mapping = cmp.mapping.preset.insert({
-                ["<C-j>"]     = cmp.mapping.select_next_item(),
-                ["<C-k>"]     = cmp.mapping.select_prev_item(),
-                ["<CR>"]      = cmp.mapping.confirm({
+                ["<C-j>"]   = cmp.mapping.select_next_item(),
+                ["<C-k>"]   = cmp.mapping.select_prev_item(),
+                ["<CR>"]    = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select   = true,
                 }),
-                ["<Tab>"]     = cmp.mapping(function(fallback)
+                ["<Tab>"]   = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_locally_jumpable() then
@@ -76,7 +84,7 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<S-Tab>"]   = cmp.mapping(function(fallback)
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                     elseif luasnip.locally_jumpable(-1) then
@@ -87,6 +95,11 @@ return {
                 end, { "i", "s" }),
             }),
         })
+
+        -- fugitive
+        wk.add({ "<leader>gg", ":Git<CR>", desc = "[G]it [G]it" })
+        wk.add({ "<leader>gd", ":Git<CR>", desc = "[G]it [D]iff" })
+        wk.add({ "<leader>gc", ":Git<CR>", desc = "[G]it [C]ommit" })
 
         -- gitsigns
         require("gitsigns").setup({
@@ -166,6 +179,9 @@ return {
 
         -- oil
         wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
+
+        -- showkeys
+        wk.add({ "<leader>ts", ":ShowkeysToggle<CR>", desc = "[T]oggle [S]howKeys" })
 
         -- twilight
         wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })

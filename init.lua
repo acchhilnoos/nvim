@@ -21,8 +21,10 @@ require("lazy").setup({
         -- all keymaps are in remap.lua
         { import = "config" },
     },
-    install = {
-        colorscheme = None
-    },
+    -- install = {
+    --     colorscheme = None
+    -- },
 })
+
+vim.cmd("ShowkeysToggle")
 print("Load complete.")

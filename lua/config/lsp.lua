@@ -29,7 +29,6 @@ return {
                     "clangd",
                     "jdtls",
                     "lua_ls",
-                    "texlab",
                     "marksman",
                     "pyright",
                 },
