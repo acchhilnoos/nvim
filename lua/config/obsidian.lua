@@ -11,7 +11,7 @@ return {
             workspaces = {
                 {
                     name = "UBC",
-                    path = "/Users/nicholascho/Documents/UBC/Notes",
+                    path = "/Users/nicholascho/Documents/UBC/Year 4/Term 1/Notes",
                 },
             },
             log_level = vim.log.levels.INFO,
@@ -82,7 +82,7 @@ return {
                 vim.fn.jobstart { "qlmanage", "-p", img }
             end,
             use_advanced_uri = false,
-            open_app_foreground = false,
+            open_app_foreground = true,
             picker = {
                 name = "telescope.nvim",
                 note_mappings = {

@@ -1,49 +1,3 @@
-local palette = {
-    _nc = "#1f1d30",
-    love = "#eb6f92",
-    gold = "#f6c177",
-    rose = "#ea9a97",
-    pine = "#3e8fb0",
-    foam = "#9ccfd8",
-    iris = "#c4a7e7",
-    leaf = "#95b1ac",
-    none = "NONE",
-}
-local colors = {
-    normal = {
-        a = {bg = palette.love, fg = palette._nc, gui = "bold"},
-        b = {bg = palette.none, fg = palette.rose},
-        c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
-    },
-    insert = {
-        a = {bg = palette.pine, fg = palette._nc, gui = "bold"},
-        b = {bg = palette.none, fg = palette.rose},
-        c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
-    },
-    visual = {
-        a = {bg = palette.iris, fg = palette._nc, gui = "bold"},
-        b = {bg = palette.none, fg = palette.rose},
-        c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
-    },
-    replace = {
-        a = {bg = palette.leaf, fg = palette._nc, gui = "bold"},
-        b = {bg = palette.none, fg = palette.rose},
-        c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
-    },
-    command = {
-        a = {bg = palette.gold, fg = palette._nc, gui = "bold"},
-        b = {bg = palette.none, fg = palette.rose},
-        c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
-    },
-    inactive = {
-        c = {bg = palette.none, fg = palette.foam},
-    },
-}
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -63,7 +17,6 @@ return {
                 section_separators = "",
                 always_divide_middle = true,
                 globalstatus = false,
-                theme = colors,
             },
             sections = {
                 lualine_a = { "filename" },
