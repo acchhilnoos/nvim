@@ -9,7 +9,7 @@ return {
                 "icon",
                 -- "permissions",
                 "size",
-                -- "mtime",
+                "mtime",
             },
             buf_options = {
                 buflisted = true,
@@ -79,6 +79,7 @@ return {
                 win_options = {
                     winblend = 0,
                 },
+                preview_split = "right",
                 override = function(conf)
                     return conf
                 end,

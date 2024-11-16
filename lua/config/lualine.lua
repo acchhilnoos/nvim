@@ -1,4 +1,5 @@
 local palette = {
+    text = "#e0def4",
     _nc = "#1f1d30",
     love = "#eb6f92",
     gold = "#f6c177",
@@ -14,34 +15,34 @@ local colors = {
         a = {bg = palette.love, fg = palette._nc, gui = "bold"},
         b = {bg = palette.none, fg = palette.rose},
         c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
+        y = {bg = palette.none, fg = palette.text},
     },
     insert = {
         a = {bg = palette.pine, fg = palette._nc, gui = "bold"},
         b = {bg = palette.none, fg = palette.rose},
         c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
+        y = {bg = palette.none, fg = palette.text},
     },
     visual = {
         a = {bg = palette.iris, fg = palette._nc, gui = "bold"},
         b = {bg = palette.none, fg = palette.rose},
         c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
+        y = {bg = palette.none, fg = palette.text},
     },
     replace = {
         a = {bg = palette.leaf, fg = palette._nc, gui = "bold"},
         b = {bg = palette.none, fg = palette.rose},
         c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
+        y = {bg = palette.none, fg = palette.text},
     },
     command = {
         a = {bg = palette.gold, fg = palette._nc, gui = "bold"},
         b = {bg = palette.none, fg = palette.rose},
         c = {bg = palette.none, fg = palette.none},
-        y = {bg = palette.none, fg = palette.foam},
+        y = {bg = palette.none, fg = palette.text},
     },
     inactive = {
-        c = {bg = palette.none, fg = palette.foam},
+        c = {bg = palette.none, fg = palette.text},
     },
 }
 return {
@@ -71,7 +72,7 @@ return {
                 lualine_c = { "branch", "diff" },
                 lualine_x = { {"filetype", icon_only = true} },
                 lualine_y = { "os.date('%a %b %d %H:%M')" },
-                lualine_z = { "location" },
+                lualine_z = { "location", "progress" },
             },
             extensions = {
                 "fugitive",

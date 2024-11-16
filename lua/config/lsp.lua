@@ -31,6 +31,7 @@ return {
                     "lua_ls",
                     "marksman",
                     "pyright",
+                    "rust_analyzer",
                 },
             })
             require("lspconfig").racket_langserver.setup({

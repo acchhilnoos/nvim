@@ -7,9 +7,12 @@ return {
 
         ---- GENERAL
 
+        --- RELOAD CONFIG
+        wk.add({ "<leader>rc", ":luafile ~/.config/nvim/init.lua<CR>", desc = "[R]eload [C]onfig" })
+
         -- WRITE/QUIT
         wk.add({ "<leader>w", ":w<CR>", desc = "[W]rite" })
-        wk.add({ "<leader>wq", ":wq<CR>", desc = "[W]rite  [Q]uit" })
+        wk.add({ "<leader>wq", ":wq<CR>", desc = "[W]rite [Q]uit" })
 
         -- FORMAT
         wk.add({ "<leader>df", ":lua vim.lsp.buf.format()<CR> <BAR> :w<CR>", desc = "[D]ocument [F]ormat" })
@@ -51,17 +54,21 @@ return {
             { "<leader>g",  group = "[G]it" },
             { "<leader>g_", hidden = true },
             { "<leader>l",  desc = "Vimtex" },
-            { "l_",         hidden = true },
+            { "<leader>l_", hidden = true },
+            { "<leader>n",  desc = "[N]oice" },
+            { "<leader>n_", hidden = true },
             { "<leader>o",  desc = "[O]pen" },
-            { "o_",         hidden = true },
-            { "<leader>r",  group = "[R]ename" },
+            { "<leader>o_", hidden = true },
+            { "<leader>r",  group = "[R]e-" },
             { "<leader>r_", hidden = true },
-            { "<leader>s",  group = "[S]earch" },
+            { "<leader>s",  group = "[S]urround" },
             { "<leader>s_", hidden = true },
             { "<leader>t",  group = "[T]oggle" },
             { "<leader>t_", hidden = true },
-            { "<leader>w",  group = "[W]orkspace" },
+            { "<leader>w",  group = "[W]rite" },
             { "<leader>w_", hidden = true },
+            { "<leader>W",  group = "[W]orkspace" },
+            { "<leader>W_", hidden = true },
         })
 
         -- cmp
@@ -115,6 +122,28 @@ return {
             end,
         })
 
+        -- leap
+        wk.add({ "<leader>l", "<Plug>(leap-forward)", desc = "[L]eap (forward)", hidden = true })
+        wk.add({ "<leader>L", "<Plug>(leap-backward)", desc = "[L]eap (backward)", hidden = true })
+
+        -- noice
+        wk.add({ "<leader>nd", ":Noice dismiss<CR>", desc = "[N]oice [D]ismiss" })
+        wk.add({ "<leader>nl", ":Noice last<CR>", desc = "[N]oice [L]ast" })
+        wk.add({ "<leader>nt", ":Noice telescope<CR>", desc = "[N]oice [T]elescope" })
+
+        -- obsidian
+        wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
+
+        -- oil
+        wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
+
+        -- showkeys
+        wk.add({ "<leader>ts", ":ShowkeysToggle<CR>", desc = "[T]oggle [S]howKeys" })
+
+        -- snacks
+        wk.add({ "<C-/>", ":lua Snacks.terminal()<CR>", desc = "Snacks Terminal" })
+        vim.cmd.tnoremap("<Esc>", "<C-\\><C-n>")
+
         -- supermaven
         require("supermaven-nvim").setup({
             keymaps = {
@@ -149,13 +178,13 @@ return {
         local on_attach = function(_, bufnr)
             wk.add({ "<leader>rn", ":IncRename ", desc = "[R]e[n]ame" })
             wk.add({ "<leader>ca", vim.lsp.buf.code_action, desc = "[C]ode [A]ction" })
-            wk.add({ "gd", require("telescope.builtin").lsp_definitions, desc = "[G]oto [D]efinition" })
-            wk.add({ "gr", require("telescope.builtin").lsp_references, desc = "[G]oto [R]eferences" })
-            wk.add({ "gI", require("telescope.builtin").lsp_implementations, desc = "[G]oto [I]mplementation" })
-            wk.add({ "<leader>ds", require("telescope.builtin").lsp_document_symbols, desc = "[D]ocument [S]ymbols" })
+            wk.add({ "gd", tbi.lsp_definitions, desc = "[G]oto [D]efinition" })
+            wk.add({ "gr", tbi.lsp_references, desc = "[G]oto [R]eferences" })
+            wk.add({ "gI", tbi.lsp_implementations, desc = "[G]oto [I]mplementation" })
+            wk.add({ "<leader>ds", tbi.lsp_document_symbols, desc = "[D]ocument [S]ymbols" })
             wk.add({
-                "<leader>ws",
-                require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                "<leader>Ws",
+                tbi.lsp_dynamic_workspace_symbols,
                 desc =
                 "[W]orkspace [S]ymbols"
             })
@@ -174,20 +203,15 @@ return {
             end,
         })
 
-        -- obsidian
-        wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
-
-        -- oil
-        wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
-
-        -- showkeys
-        wk.add({ "<leader>ts", ":ShowkeysToggle<CR>", desc = "[T]oggle [S]howKeys" })
-
-        -- twilight
-        wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
+        -- todo-comments
+        wk.add({ "<leader>dl", ":TodoQuickFix cwd=vim.fn.getcwd()<CR>", desc = "[D]ocument TODO [L]ist" })
+        wk.add({ "<leader>dt", ":TodoTelescope<CR> cwd=vim.fn.getcwd()<CR", desc = "[D]ocument TODO [T]elescope" })
 
         -- true-zen
         wk.add({ "<leader>tf", function() vim.cmd.TZAtaraxis() end, desc = "[T]oggle [F]ocus" })
+
+        -- twilight
+        wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
 
         -- undotree
         wk.add({

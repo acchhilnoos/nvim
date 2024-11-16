@@ -4,6 +4,13 @@ return {
     config = function()
         require("mini.ai").setup()
         require("mini.align").setup()
+        require("mini.indentscope").setup()
+        local hipatterns = require("mini.hipatterns")
+        hipatterns.setup({
+            highlighters = {
+                hex_color = hipatterns.gen_highlighter.hex_color(),
+            },
+        })
         local starter = require("mini.starter")
         starter.setup({
             items = {
@@ -16,15 +23,23 @@ return {
                 { name = "Quit",       action = "qall",                            section = "Actions" },
             },
             content_hooks = {
-                starter.gen_hook.indexing('all', { 'Actions' }),
+                starter.gen_hook.adding_bullet(),
                 starter.gen_hook.aligning('center', 'center'),
             },
             footer = "",
         })
-        local hipatterns = require("mini.hipatterns")
-        hipatterns.setup({
-            highlighters = {
-                hex_color = hipatterns.gen_highlighter.hex_color(),
+        require("mini.surround").setup({
+            mappings = {
+                add = 'sa',
+                delete = 'sd',
+                find = 'sf',
+                find_left = 'sF',
+                highlight = 'sh',
+                replace = 'sr',
+                update_n_lines = 'sn',
+
+                suffix_last = 'l',
+                suffix_next = 'n',
             },
         })
     end,

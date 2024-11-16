@@ -2,6 +2,8 @@
 
 -- CURSOR
 vim.opt.guicursor = ""
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 
 -- LINE NUMBERS
 vim.opt.nu = true
@@ -16,6 +18,9 @@ vim.opt.expandtab = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+
+-- SCROLL
+vim.opt.scrolloff = 5
 
 -- COLOURS
 vim.opt.termguicolors = true
