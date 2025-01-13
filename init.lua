@@ -25,6 +25,3 @@ require("lazy").setup({
     --     colorscheme = None
     -- },
 })
-
-vim.cmd("ShowkeysToggle")
-print("Load complete.")

@@ -4,6 +4,7 @@ return {
     config = function()
         require("mini.ai").setup()
         require("mini.align").setup()
+        require("mini.comment").setup()
         require("mini.indentscope").setup()
         local hipatterns = require("mini.hipatterns")
         hipatterns.setup({
@@ -24,6 +25,7 @@ return {
             },
             content_hooks = {
                 starter.gen_hook.adding_bullet(),
+                starter.gen_hook.indexing('all', { 'Actions' }),
                 starter.gen_hook.aligning('center', 'center'),
             },
             footer = "",

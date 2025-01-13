@@ -30,6 +30,7 @@ return {
                     "jdtls",
                     "lua_ls",
                     "marksman",
+                    "ocamllsp",
                     "pyright",
                     "rust_analyzer",
                 },

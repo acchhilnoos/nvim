@@ -15,13 +15,13 @@ return {
         wk.add({ "<leader>wq", ":wq<CR>", desc = "[W]rite [Q]uit" })
 
         -- FORMAT
-        wk.add({ "<leader>df", ":lua vim.lsp.buf.format()<CR> <BAR> :w<CR>", desc = "[D]ocument [F]ormat" })
+        wk.add({ "<leader>df", ":FormatWrite<CR>", desc = "[D]ocument [F]ormat" })
 
         -- WINDOWS
-        wk.add({ "<leader>H", ":vsplit<CR>", hidden = true })
-        wk.add({ "<leader>J", ":split <BAR> :wincmd j<CR>", hidden = true })
-        wk.add({ "<leader>K", ":split<CR>", hidden = true })
-        wk.add({ "<leader>L", ":vsplit <BAR> :wincmd l<CR>", hidden = true })
+        wk.add({ "<C-w>H", ":vsplit<CR>", hidden = true })
+        wk.add({ "<C-w>J", ":split <BAR> :wincmd j<CR>", hidden = true })
+        wk.add({ "<C-w>K", ":split<CR>", hidden = true })
+        wk.add({ "<C-w>L", ":vsplit <BAR> :wincmd l<CR>", hidden = true })
 
         -- MOVEMENT
         vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -55,8 +55,8 @@ return {
             { "<leader>g_", hidden = true },
             { "<leader>l",  desc = "Vimtex" },
             { "<leader>l_", hidden = true },
-            { "<leader>n",  desc = "[N]oice" },
-            { "<leader>n_", hidden = true },
+            -- { "<leader>n",  desc = "[N]oice" },
+            -- { "<leader>n_", hidden = true },
             { "<leader>o",  desc = "[O]pen" },
             { "<leader>o_", hidden = true },
             { "<leader>r",  group = "[R]e-" },
@@ -104,9 +104,8 @@ return {
         })
 
         -- fugitive
-        wk.add({ "<leader>gg", ":Git<CR>", desc = "[G]it [G]it" })
-        wk.add({ "<leader>gd", ":Git<CR>", desc = "[G]it [D]iff" })
-        wk.add({ "<leader>gc", ":Git<CR>", desc = "[G]it [C]ommit" })
+        -- wk.add({ "<leader>gg", ":Git<CR>", desc = "[G]it [G]it" })
+        -- wk.add({ "<leader>gd", ":Git diff<CR>", desc = "[G]it [D]iff" })
 
         -- gitsigns
         require("gitsigns").setup({
@@ -118,39 +117,33 @@ return {
                 wk.add({ "<leader>fb", blame_line, desc = "[F]loating [B]lame" })
                 wk.add({ "<leader>tb", gs.toggle_current_line_blame, desc = "[T]oggle git [B]lame" })
                 wk.add({ "<leader>td", gs.toggle_deleted, desc = "[T]oggle git [D]eleted" })
-                wk.add({ "<leader>fp", gs.preview_hunk, desc = "[F]loating [P]review Hunk" })
+                wk.add({ "<leader>fh", gs.preview_hunk, desc = "[F]loating [H]unk Preview" })
             end,
         })
 
         -- leap
-        wk.add({ "<leader>l", "<Plug>(leap-forward)", desc = "[L]eap (forward)", hidden = true })
-        wk.add({ "<leader>L", "<Plug>(leap-backward)", desc = "[L]eap (backward)", hidden = true })
+        -- wk.add({ "<leader>s", "<Plug>(leap-forward)", desc = "leap forward", hidden = true })
+        -- wk.add({ "<leader>S", "<Plug>(leap-backward)", desc = "leap backward", hidden = true })
 
         -- noice
-        wk.add({ "<leader>nd", ":Noice dismiss<CR>", desc = "[N]oice [D]ismiss" })
-        wk.add({ "<leader>nl", ":Noice last<CR>", desc = "[N]oice [L]ast" })
-        wk.add({ "<leader>nt", ":Noice telescope<CR>", desc = "[N]oice [T]elescope" })
+        -- wk.add({ "<leader>nd", ":Noice dismiss<CR>", desc = "[N]oice [D]ismiss" })
+        -- wk.add({ "<leader>nl", ":Noice last<CR>", desc = "[N]oice [L]ast" })
+        -- wk.add({ "<leader>nt", ":Noice telescope<CR>", desc = "[N]oice [T]elescope" })
 
         -- obsidian
-        wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
+        -- wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
 
         -- oil
         wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
 
-        -- showkeys
-        wk.add({ "<leader>ts", ":ShowkeysToggle<CR>", desc = "[T]oggle [S]howKeys" })
-
-        -- snacks
-        wk.add({ "<C-/>", ":lua Snacks.terminal()<CR>", desc = "Snacks Terminal" })
-        vim.cmd.tnoremap("<Esc>", "<C-\\><C-n>")
-
         -- supermaven
-        require("supermaven-nvim").setup({
-            keymaps = {
-                accept_suggestion = "<C-Space>",
-                accept_word       = "<C-l>",
-            },
-        })
+        -- require("supermaven-nvim").setup({
+        --     keymaps = {
+        --         accept_suggestion = "<C-Space>",
+        --         accept_word       = "<C-l>",
+        --     },
+        -- })
+        -- wk.add({ "<leader>ts", ":SupermavenToggle<CR>", desc = "[T]oggle [S]upermaven" })
 
         -- telescope
         require("telescope").setup({
@@ -183,7 +176,7 @@ return {
             wk.add({ "gI", tbi.lsp_implementations, desc = "[G]oto [I]mplementation" })
             wk.add({ "<leader>ds", tbi.lsp_document_symbols, desc = "[D]ocument [S]ymbols" })
             wk.add({
-                "<leader>Ws",
+                "<leader>WS",
                 tbi.lsp_dynamic_workspace_symbols,
                 desc =
                 "[W]orkspace [S]ymbols"
@@ -203,15 +196,18 @@ return {
             end,
         })
 
+        wk.add({"<leader>fq", ":Telescope quickfix<CR>", desc = "[F]loating [Q]uickfix"})
+        wk.add({"<leader>fl", ":Telescope loclist<CR>", desc = "[F]loating [L]oclist"})
+
         -- todo-comments
-        wk.add({ "<leader>dl", ":TodoQuickFix cwd=vim.fn.getcwd()<CR>", desc = "[D]ocument TODO [L]ist" })
-        wk.add({ "<leader>dt", ":TodoTelescope<CR> cwd=vim.fn.getcwd()<CR", desc = "[D]ocument TODO [T]elescope" })
+        wk.add({ "<leader>dl", ":TodoQuickFix<CR>", desc = "[D]ocument TODO [L]ist" })
+        wk.add({ "<leader>dt", ":TodoTelescope<CR>", desc = "[D]ocument TODO [T]elescope" })
 
         -- true-zen
-        wk.add({ "<leader>tf", function() vim.cmd.TZAtaraxis() end, desc = "[T]oggle [F]ocus" })
+        -- wk.add({ "<leader>tz", function() vim.cmd.TZAtaraxis() end, desc = "[T]oggle [Z]en" })
 
         -- twilight
-        wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
+        -- wk.add({ "<leader>tt", ":Twilight<CR>", desc = "[T]oggle [T]wilight" })
 
         -- undotree
         wk.add({

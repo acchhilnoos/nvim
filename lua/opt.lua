@@ -20,7 +20,7 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 
 -- SCROLL
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 10
 
 -- COLOURS
 vim.opt.termguicolors = true
