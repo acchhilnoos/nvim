@@ -122,8 +122,8 @@ return {
         })
 
         -- leap
-        -- wk.add({ "<leader>s", "<Plug>(leap-forward)", desc = "leap forward", hidden = true })
-        -- wk.add({ "<leader>S", "<Plug>(leap-backward)", desc = "leap backward", hidden = true })
+        wk.add({ "<C-s>", "<Plug>(leap-forward)", desc = "leap forward", hidden = true })
+        wk.add({ "<C-S-s>", "<Plug>(leap-backward)", desc = "leap backward", hidden = true })
 
         -- noice
         -- wk.add({ "<leader>nd", ":Noice dismiss<CR>", desc = "[N]oice [D]ismiss" })

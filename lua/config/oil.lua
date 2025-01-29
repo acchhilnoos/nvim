@@ -93,7 +93,7 @@ return {
                 height = nil,
                 border = "rounded",
                 win_options = {
-                    winblend = 10,
+                    winblend = 0,
                 },
                 update_on_cursor_moved = true,
             },
