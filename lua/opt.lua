@@ -32,10 +32,10 @@ vim.cmd("highlight Normal ctermbg=none")
 vim.cmd("highlight NonText ctermbg=none")
 
 -- CONCEALLEVEL
-vim.opt.conceallevel = 1
-vim.cmd([[
-:autocmd BufEnter *.tex set conceallevel=0
-]])
+vim.opt.conceallevel = 0
+-- vim.cmd([[
+-- :autocmd BufEnter *.tex set conceallevel=0
+-- ]])
 
 vim.opt.showtabline = 0
 
@@ -48,6 +48,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_group,
 	pattern = "*",
 })
+
+vim.diagnostic.config({ virtual_text = { current_line = true, }, })
 
 ---- GENERAL
 
