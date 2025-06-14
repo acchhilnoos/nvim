@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
-vim.diagnostic.config({ virtual_text = { current_line = true, }, })
+vim.diagnostic.config({ virtual_text = { current_line = true, }})
 
 ---- GENERAL
 
