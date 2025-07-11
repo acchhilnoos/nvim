@@ -26,7 +26,17 @@ return {
         appearance = {
             nerd_font_variant = 'mono'
         },
-        completion = { documentation = { auto_show = false } },
+        completion = {
+            documentation = {
+                auto_show = true,
+                window = { border = 'rounded' }
+            },
+            menu = { border = 'none' }
+        },
+        signature = {
+            enabled = false,
+            window = { border = 'double' },
+        },
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
         },

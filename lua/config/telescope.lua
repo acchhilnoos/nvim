@@ -3,16 +3,20 @@ return {
     branch = "0.1.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
+        "BurntSushi/ripgrep",
         {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
-            cond = function()
-                return vim.fn.executable("make") == 1
-            end,
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'make',
         },
     },
     config = function()
-        require("telescope").setup({})
+        require("telescope").setup({
+            extensions = {
+                fzf = {
+                    fuzzy  = true,
+                }
+            }
+        })
         pcall(require("telescope").load_extension, "fzf")
     end,
 }

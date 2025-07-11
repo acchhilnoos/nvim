@@ -32,6 +32,7 @@ return {
         vim.cmd.nnoremap("<C-u>", "<C-u>zz")
         vim.cmd.nnoremap("#", "#zz")
         vim.cmd.nnoremap("*", "*zz")
+        vim.cmd.tnoremap("<esc><esc>", "<C-\\><C-n>")
 
         -- INDENT
         vim.cmd.vnoremap("<", "<gv")
@@ -127,6 +128,9 @@ return {
 
         -- lsp
         wk.add({ "<leader>rl", ":edit<CR>", desc = "[R]eload [L]SP" })
+        wk.add({ "K", function ()
+            vim.lsp.buf.hover({ border = 'single' })
+        end })
 
         -- noice
         -- wk.add({ "<leader>nd", ":Noice dismiss<CR>", desc = "[N]oice [D]ismiss" })
@@ -201,6 +205,51 @@ return {
 
         wk.add({"<leader>fq", ":Telescope quickfix<CR>", desc = "[F]loating [Q]uickfix"})
         wk.add({"<leader>fl", ":Telescope loclist<CR>", desc = "[F]loating [L]oclist"})
+
+        -- terminal
+        local state = {
+            floating = {
+                buf = -1,
+                win = -1,
+            },
+        }
+
+        local function ft(opts)
+            opts = opts or {}
+            local width = opts.width or math.floor(vim.o.columns * 0.8)
+            local height = opts.height or math.floor(vim.o.lines * 0.8)
+            local col = math.floor((vim.o.columns-width)/2)
+            local row = math.floor((vim.o.lines-height)/2)
+            local buf = nil
+            if vim.api.nvim_buf_is_valid(opts.buf) then
+                buf = opts.buf
+            else
+                buf = vim.api.nvim_create_buf(false,true)
+            end
+            local win_config = {
+                relative="editor",
+                width=width,
+                height=height,
+                col=col,
+                row=row,
+                style="minimal",
+                border="single"
+            }
+            local win = vim.api.nvim_open_win(buf, true, win_config)
+            return {buf = buf, win = win}
+        end
+        local tt = function()
+            if not vim.api.nvim_win_is_valid(state.floating.win) then
+                state.floating = ft{buf = state.floating.buf}
+                if vim.bo[state.floating.buf].buftype ~= "terminal" then
+                    vim.cmd.terminal()
+                end
+            else
+                vim.api.nvim_win_hide(state.floating.win)
+            end
+        end
+        wk.add({ "<leader>ot", function() tt() end, desc = "[O]pen [T]erminal" })
+        wk.add({ "<esc><esc>", function() tt() end, hidden = true, mode = "t" })
 
         -- todo-comments
         wk.add({ "<leader>dl", ":TodoQuickFix<CR>", desc = "[D]ocument TODO [L]ist" })
