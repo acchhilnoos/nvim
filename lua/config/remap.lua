@@ -24,12 +24,40 @@ return {
         wk.add({ "<C-w>L", ":vsplit <BAR> :wincmd l<CR>", hidden = true })
 
         -- MOVEMENT
-        vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-        vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-        vim.cmd.nnoremap("<C-d>", "<C-d>zz")
-        vim.cmd.nnoremap("<C-i>", "<C-i>zz")
-        vim.cmd.nnoremap("<C-o>", "<C-o>zz")
-        vim.cmd.nnoremap("<C-u>", "<C-u>zz")
+        vim.keymap.set("n", "n", "v:count == 0 ? 'gn' : 'n'", { expr = true, silent = true })
+        vim.keymap.set("n", "e", "v:count == 0 ? 'ge' : 'e'", { expr = true, silent = true })
+
+        vim.cmd.noremap("f", "h")
+        vim.cmd.noremap("n", "j")
+        vim.cmd.noremap("N", "J")
+        vim.cmd.noremap("e", "k")
+        vim.cmd.noremap("E", "K")
+        vim.cmd.noremap("i", "l")
+
+        vim.cmd.noremap("t", "f")
+        vim.cmd.noremap("T", "F")
+        vim.cmd.noremap("k", "t")
+        vim.cmd.noremap("K", "T")
+
+        vim.cmd.noremap("m", "n")
+
+        vim.cmd.noremap("y", "e")
+        vim.cmd.noremap("z", "y")
+        vim.cmd.noremap("zz", "yy")
+        vim.cmd.noremap("Z", "Y")
+
+        vim.cmd.noremap("o", "i")
+        vim.cmd.noremap("O", "I")
+        vim.cmd.noremap("<C-o>", "<C-i>zz")
+        vim.cmd.noremap("u", "o")
+        vim.cmd.noremap("U", "O")
+        vim.cmd.noremap("<C-u>", "<C-o>zz")
+        vim.cmd.noremap("x", "u")
+        vim.cmd.nnoremap("<C-x>", "<C-u>zz")
+
+        vim.cmd.nnoremap("<C-s>", "<C-d>zz")
+
+        vim.cmd.nnoremap("jj", "zz")
         vim.cmd.nnoremap("#", "#zz")
         vim.cmd.nnoremap("*", "*zz")
         vim.cmd.tnoremap("<esc><esc>", "<C-\\><C-n>")
@@ -123,12 +151,12 @@ return {
         })
 
         -- leap
-        wk.add({ "<C-s>", "<Plug>(leap-forward)", desc = "leap forward", hidden = true })
-        wk.add({ "<C-S-s>", "<Plug>(leap-backward)", desc = "leap backward", hidden = true })
+        -- wk.add({ "<C-s>", "<Plug>(leap-forward)", desc = "leap forward", hidden = true })
+        -- wk.add({ "<C-S-s>", "<Plug>(leap-backward)", desc = "leap backward", hidden = true })
 
         -- lsp
         wk.add({ "<leader>rl", ":edit<CR>", desc = "[R]eload [L]SP" })
-        wk.add({ "K", function ()
+        wk.add({ "E", function ()
             vim.lsp.buf.hover({ border = 'single' })
         end })
 
@@ -141,7 +169,7 @@ return {
         -- wk.add({ "<leader>oo", ":ObsidianOpen<CR>", desc = "[O]pen [O]bsidian" })
 
         -- oil
-        wk.add({ "<leader>pv", ":lua require('oil').open_float()<CR>", hidden = true })
+        wk.add({ "<leader>oo", ":lua require('oil').open_float()<CR>", hidden = true })
 
         -- supermaven
         -- require("supermaven-nvim").setup({
