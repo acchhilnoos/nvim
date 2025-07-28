@@ -1,21 +1,22 @@
 -- OPTS
 vim.o.mouse = ''
-vim.o.mousescroll = 'ver:0,hor:0'
 
-vim.o.cot  = 'menuone,noselect,popup'
-vim.o.et   = true
-vim.o.ic   = true
-vim.o.nu   = true
-vim.o.rnu  = true
-vim.o.scl  = 'yes'
-vim.o.scs  = true
-vim.o.so   = 8
-vim.o.stal = 0
-vim.o.sts  = 2
-vim.o.sw   = 2
-vim.o.ts   = 8
-vim.o.udf  = true
-vim.o.wrap = false
+vim.o.cot       = 'menuone,noselect,popup'
+vim.o.et        = true
+vim.o.ic        = true
+vim.o.nu        = true
+vim.o.rnu       = true
+vim.o.scl       = 'yes'
+vim.o.scs       = true
+vim.o.so        = 8
+vim.o.stal      = 0
+vim.o.sts       = 2
+vim.o.sw        = 2
+vim.o.tgc       = true
+vim.o.ts        = 8
+vim.o.udf       = true
+vim.o.wrap      = false
+vim.o.winborder = 'rounded'
 
 -- COLOURS
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -23,6 +24,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank({})
   end,
 })
+
+vim.cmd('hi Normal       guibg=NONE')
+vim.cmd('hi StatusLine   guibg=NONE')
+vim.cmd('hi StatusLine   guifg=NONE')
+vim.cmd('hi StatusLineNC guibg=NONE')
+vim.cmd('hi NormalFloat  guibg=NONE')
 
 -- PLUGINS
 vim.pack.add({
@@ -35,23 +42,16 @@ vim.pack.add({
 
 require('formatter').setup({
   filetype = {
-    c = {
-      require('formatter.filetypes.c').clangformat,
-    },
-    cpp = {
-      require('formatter.filetypes.cpp').clangformat,
-    },
-    ocaml = {
-      require('formatter.filetypes.ocaml').ocamlformat,
-    },
-    ['*'] = {
-      require('formatter.filetypes.any').remove_trailing_whitespace,
-    },
+    c     = { require('formatter.filetypes.c')    .clangformat, },
+    cpp   = { require('formatter.filetypes.cpp')  .clangformat, },
+    ocaml = { require('formatter.filetypes.ocaml').ocamlformat, },
+    ['*'] = { require('formatter.filetypes.any')  .remove_trailing_whitespace, },
   },
 })
 
-require('mini.align').setup()
-require('mini.pick').setup()
+require('mini.align')      .setup()
+require('mini.indentscope').setup()
+require('mini.pick')       .setup()
 
 require('oil').setup({
   keymaps = {
@@ -82,23 +82,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- KEYMAPS
 vim.g.mapleader = ' '
 
-vim.keymap.set({'n'}, '<leader>q',   ':update<CR>:q<CR>')
-vim.keymap.set({'n'}, '<leader>w',   ':w<CR>')
-vim.keymap.set({'n'}, '<leader>rc',  ':so ~/.config/nvim/init.lua<CR>')
+vim.keymap.set({'n'}, '<leader>q', ':update<CR>:q<CR>')
+vim.keymap.set({'n'}, '<leader>w', ':w<CR>')
+vim.keymap.set({'n'}, '<leader>rc',':so ~/.config/nvim/init.lua<CR>')
 
-vim.keymap.set({'n'}, '<leader>df',  ':FormatWrite<CR>')
+vim.keymap.set({'n'}, '<leader>df',':FormatWrite<CR>')
 
-vim.keymap.set({'n'}, '<leader>oo',  ':lua require("oil").open_float()<CR>')
+vim.keymap.set({'n'}, '<leader>oo',':lua require("oil").open_float()<CR>')
 
-vim.keymap.set({'n'}, '<leader> ',   ':Pick buffers<CR>')
-vim.keymap.set({'n'}, '<leader>/',   ':Pick files<CR>')
-vim.keymap.set({'n'}, '<leader>?',   ':Pick grep_live<CR>')
+vim.keymap.set({'n'}, '<leader> ', ':Pick buffers<CR>')
+vim.keymap.set({'n'}, '<leader>/', ':Pick files<CR>')
+vim.keymap.set({'n'}, '<leader>.', ':Pick help<CR>')
+vim.keymap.set({'n'}, '<leader>?', ':Pick grep_live<CR>')
 
-vim.keymap.set({'n'}, '<leader>d',   vim.diagnostic.open_float)
-vim.keymap.set({'n'}, '<leader>h',   function() vim.lsp.buf.hover({ border = 'rounded' }) end)
+vim.keymap.set({'n'}, '<leader>d', vim.diagnostic.open_float)
+vim.keymap.set({'n'}, '<leader>h', vim.lsp.buf.hover)
 
-vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-vim.keymap.set({'n'}, 'S',           function() require('leap.remote').action() end)
+vim.keymap.set({'n','x','o'}, 's', '<Plug>(leap)')
+vim.keymap.set({'n'}, 'S',         function() require('leap.remote').action() end)
 
 vim.cmd.noremap('<',     '<gv')
 vim.cmd.noremap('>',     '>gv')
