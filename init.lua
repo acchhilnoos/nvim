@@ -1,38 +1,30 @@
 -- OPTS
 vim.o.mouse = ''
 
-vim.o.cot       = 'menuone,noselect,popup'
-vim.o.et        = true
-vim.o.ic        = true
-vim.o.nu        = true
-vim.o.rnu       = true
-vim.o.scl       = 'yes'
-vim.o.scs       = true
-vim.o.so        = 8
-vim.o.stal      = 0
-vim.o.sts       = 2
-vim.o.sw        = 2
-vim.o.tgc       = true
-vim.o.ts        = 8
-vim.o.udf       = true
-vim.o.wrap      = false
-vim.o.winborder = 'rounded'
+vim.o.cot       = ''        -- completeopt
+vim.o.et        = true      -- expandtab
+vim.o.ic        = true      -- ignorecase
+vim.o.nu        = true      -- number
+vim.o.rnu       = true      -- relativenumber
+vim.o.scl       = 'yes'     -- signcolumn
+vim.o.scs       = true      -- smartcase
+vim.o.so        = 8         -- scrolloff
+vim.o.stal      = 0         -- showtabline
+vim.o.sts       = 2         -- softtabstop
+vim.o.sw        = 2         -- shiftwidth
+vim.o.swf       = false     -- swapfile
+vim.o.tgc       = true      -- termguicolors
+vim.o.ts        = 8         -- tabstop
+vim.o.udf       = true      -- undofile
+vim.o.wrap      = false     -- wrap
+vim.o.winborder = 'rounded' -- winborder
 
--- COLOURS
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank({})
-  end,
-})
-
-vim.cmd('hi Normal       guibg=NONE')
-vim.cmd('hi StatusLine   guibg=NONE')
-vim.cmd('hi StatusLine   guifg=NONE')
-vim.cmd('hi StatusLineNC guibg=NONE')
-vim.cmd('hi NormalFloat  guibg=NONE')
+vim.diagnostic.config({underline = true, virtual_text = { current_line = true, }})
 
 -- PLUGINS
 vim.pack.add({
+   { src = 'https://github.com/saghen/blink.cmp' },
+   { src = 'https://github.com/slugbyte/lackluster.nvim' },
    { src = 'https://github.com/mhartington/formatter.nvim' },
    { src = 'https://github.com/ggandor/leap.nvim' },
    { src = 'https://github.com/echasnovski/mini.nvim.git' },
@@ -70,14 +62,48 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('ocamllsp')
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
+require('blink.cmp').setup({
+  keymap = {
+    ['<C-e>'] = { 'select_prev', 'fallback' },
+    ['<Tab>'] = { 'accept' },
+  },
+  completion = { documentation = { auto_show = true }}
+})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(ev)
+--     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--     if client:supports_method('textDocument/completion') then
+--       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--     end
+--   end,
+-- })
+
+-- COLOURS
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank({})
   end,
 })
+
+vim.cmd('colorscheme lackluster-mint')
+
+vim.cmd('hi BlinkCmpMenuBorder guibg=NONE')
+vim.cmd('hi @comment           guifg=#7a7a7a')
+vim.cmd('hi Comment            guifg=#7a7a7a')
+vim.cmd('hi FloatBorder        guifg=#8ea49e guibg=NONE')
+vim.cmd('hi FloatTitle         guibg=NONE')
+vim.cmd('hi FloatFooter        guibg=NONE')
+vim.cmd('hi MsgArea            guibg=NONE')
+vim.cmd('hi Normal             guibg=NONE')
+vim.cmd('hi NormalFloat        guibg=NONE')
+vim.cmd('hi Pmenu              guifg=NONE guibg=NONE')
+vim.cmd('hi PmenuKind          guifg=#54546d')
+vim.cmd('hi PmenuKindSel       guifg=#54546d')
+vim.cmd('hi PmenuExtra         guibg=NONE')
+vim.cmd('hi SignColumn         guibg=NONE')
+vim.cmd('hi StatusLine         guibg=NONE')
+vim.cmd('hi StatusLine         guifg=NONE')
+vim.cmd('hi StatusLineNC       guibg=NONE')
 
 -- KEYMAPS
 vim.g.mapleader = ' '
