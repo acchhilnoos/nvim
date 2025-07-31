@@ -1,4 +1,5 @@
 -- OPTS
+vim.o.guicursor = ''
 vim.o.mouse = ''
 
 vim.o.cot       = ''        -- completeopt
@@ -24,8 +25,9 @@ vim.diagnostic.config({underline = true, virtual_text = { current_line = true, }
 -- PLUGINS
 vim.pack.add({
    { src = 'https://github.com/saghen/blink.cmp' },
-   { src = 'https://github.com/slugbyte/lackluster.nvim' },
    { src = 'https://github.com/mhartington/formatter.nvim' },
+   { src = 'https://github.com/rafamadriz/friendly-snippets' },
+   { src = 'https://github.com/slugbyte/lackluster.nvim' },
    { src = 'https://github.com/ggandor/leap.nvim' },
    { src = 'https://github.com/echasnovski/mini.nvim.git' },
    { src = 'https://github.com/neovim/nvim-lspconfig' },
@@ -67,7 +69,13 @@ require('blink.cmp').setup({
     ['<C-e>'] = { 'select_prev', 'fallback' },
     ['<Tab>'] = { 'accept' },
   },
-  completion = { documentation = { auto_show = true }}
+  completion = {
+    documentation = { auto_show = true },
+    ghost_text = { enabled = true }
+  },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
 })
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   callback = function(ev)
@@ -88,6 +96,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.cmd('colorscheme lackluster-mint')
 
 vim.cmd('hi BlinkCmpMenuBorder guibg=NONE')
+vim.cmd('hi MiniPickPrompt     guibg=NONE')
 vim.cmd('hi @comment           guifg=#7a7a7a')
 vim.cmd('hi Comment            guifg=#7a7a7a')
 vim.cmd('hi FloatBorder        guifg=#8ea49e guibg=NONE')
@@ -135,3 +144,5 @@ vim.cmd.noremap('<C-d>', '<C-d>zz')
 vim.cmd.noremap('<C-i>', '<C-i>zz')
 vim.cmd.noremap('<C-o>', '<C-o>zz')
 vim.cmd.noremap('<C-u>', '<C-u>zz')
+vim.cmd.noremap('<C-e>', '<C-p>')
+vim.cmd.noremap('<C-p>', '<C-e>')
